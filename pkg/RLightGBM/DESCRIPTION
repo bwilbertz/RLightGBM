@@ -1,6 +1,6 @@
 Package: RLightGBM
 Type: Package
-Title: R Interface to the LightGBM
+Title: R Interface to the LightGBM library
 Version: 0.1
 Date: 2016-11-11
 Author: Microsoft, R Interface by Benedikt Wilbertz
@@ -9,3 +9,7 @@ Description: LightGBM is a gradient boosting framework that uses tree based lear
 License: MIT license
 Imports: Rcpp (>= 0.11.5)
 LinkingTo: Rcpp
+Suggests:
+	caret,
+	Matrix,
+	SparseM

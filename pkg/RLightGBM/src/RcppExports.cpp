@@ -7,7 +7,7 @@
 using namespace Rcpp;
 
 // RLGBM_CreateDatasetFromMat
-SEXP RLGBM_CreateDatasetFromMat(NumericMatrix x, CharacterVector params);
+Rcpp::XPtr<::LightGBM::Dataset> RLGBM_CreateDatasetFromMat(NumericMatrix x, CharacterVector params);
 RcppExport SEXP RLightGBM_RLGBM_CreateDatasetFromMat(SEXP xSEXP, SEXP paramsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -16,5 +16,137 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< CharacterVector >::type params(paramsSEXP);
     rcpp_result_gen = Rcpp::wrap(RLGBM_CreateDatasetFromMat(x, params));
     return rcpp_result_gen;
+END_RCPP
+}
+// RLGBM_CreateDatasetFromCSR
+Rcpp::XPtr<::LightGBM::Dataset> RLGBM_CreateDatasetFromCSR(IntegerVector i, IntegerVector p, NumericVector x, IntegerVector dim, CharacterVector params);
+RcppExport SEXP RLightGBM_RLGBM_CreateDatasetFromCSR(SEXP iSEXP, SEXP pSEXP, SEXP xSEXP, SEXP dimSEXP, SEXP paramsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type i(iSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type params(paramsSEXP);
+    rcpp_result_gen = Rcpp::wrap(RLGBM_CreateDatasetFromCSR(i, p, x, dim, params));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RLGBM_CreateDatasetFromCSC
+Rcpp::XPtr<::LightGBM::Dataset> RLGBM_CreateDatasetFromCSC(IntegerVector i, IntegerVector p, NumericVector x, IntegerVector dim, CharacterVector params);
+RcppExport SEXP RLightGBM_RLGBM_CreateDatasetFromCSC(SEXP iSEXP, SEXP pSEXP, SEXP xSEXP, SEXP dimSEXP, SEXP paramsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type i(iSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type params(paramsSEXP);
+    rcpp_result_gen = Rcpp::wrap(RLGBM_CreateDatasetFromCSC(i, p, x, dim, params));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RLGBM_DatasetSetField
+void RLGBM_DatasetSetField(Rcpp::XPtr<::LightGBM::Dataset> data_handle, CharacterVector field_name, NumericVector x);
+RcppExport SEXP RLightGBM_RLGBM_DatasetSetField(SEXP data_handleSEXP, SEXP field_nameSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<::LightGBM::Dataset> >::type data_handle(data_handleSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type field_name(field_nameSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    RLGBM_DatasetSetField(data_handle, field_name, x);
+    return R_NilValue;
+END_RCPP
+}
+// RLGBM_CreateBoosterFromString
+Rcpp::XPtr<::LightGBM::Booster> RLGBM_CreateBoosterFromString(Rcpp::XPtr<::LightGBM::Dataset> data_handle, CharacterVector params);
+RcppExport SEXP RLightGBM_RLGBM_CreateBoosterFromString(SEXP data_handleSEXP, SEXP paramsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<::LightGBM::Dataset> >::type data_handle(data_handleSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type params(paramsSEXP);
+    rcpp_result_gen = Rcpp::wrap(RLGBM_CreateBoosterFromString(data_handle, params));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RLGBM_CreateBooster
+Rcpp::XPtr<::LightGBM::Booster> RLGBM_CreateBooster(Rcpp::XPtr<::LightGBM::Dataset> data_handle, List config);
+RcppExport SEXP RLightGBM_RLGBM_CreateBooster(SEXP data_handleSEXP, SEXP configSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<::LightGBM::Dataset> >::type data_handle(data_handleSEXP);
+    Rcpp::traits::input_parameter< List >::type config(configSEXP);
+    rcpp_result_gen = Rcpp::wrap(RLGBM_CreateBooster(data_handle, config));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RLGBM_CreateBoosterFromFile
+Rcpp::XPtr<::LightGBM::Booster> RLGBM_CreateBoosterFromFile(CharacterVector filename);
+RcppExport SEXP RLightGBM_RLGBM_CreateBoosterFromFile(SEXP filenameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type filename(filenameSEXP);
+    rcpp_result_gen = Rcpp::wrap(RLGBM_CreateBoosterFromFile(filename));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RLGBM_TrainBooster
+void RLGBM_TrainBooster(Rcpp::XPtr<::LightGBM::Booster> booster_handle, int num_iters, int eval_iters);
+RcppExport SEXP RLightGBM_RLGBM_TrainBooster(SEXP booster_handleSEXP, SEXP num_itersSEXP, SEXP eval_itersSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<::LightGBM::Booster> >::type booster_handle(booster_handleSEXP);
+    Rcpp::traits::input_parameter< int >::type num_iters(num_itersSEXP);
+    Rcpp::traits::input_parameter< int >::type eval_iters(eval_itersSEXP);
+    RLGBM_TrainBooster(booster_handle, num_iters, eval_iters);
+    return R_NilValue;
+END_RCPP
+}
+// RLGBM_PredictFromMat
+NumericVector RLGBM_PredictFromMat(Rcpp::XPtr<::LightGBM::Booster> booster_handle, NumericMatrix x, int predict_type, int num_used_iterations);
+RcppExport SEXP RLightGBM_RLGBM_PredictFromMat(SEXP booster_handleSEXP, SEXP xSEXP, SEXP predict_typeSEXP, SEXP num_used_iterationsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<::LightGBM::Booster> >::type booster_handle(booster_handleSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type predict_type(predict_typeSEXP);
+    Rcpp::traits::input_parameter< int >::type num_used_iterations(num_used_iterationsSEXP);
+    rcpp_result_gen = Rcpp::wrap(RLGBM_PredictFromMat(booster_handle, x, predict_type, num_used_iterations));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RLGBM_PredictFromCSR
+NumericVector RLGBM_PredictFromCSR(Rcpp::XPtr<::LightGBM::Booster> booster_handle, IntegerVector i, IntegerVector p, NumericVector x, IntegerVector dim, int predict_type, int num_used_iterations);
+RcppExport SEXP RLightGBM_RLGBM_PredictFromCSR(SEXP booster_handleSEXP, SEXP iSEXP, SEXP pSEXP, SEXP xSEXP, SEXP dimSEXP, SEXP predict_typeSEXP, SEXP num_used_iterationsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<::LightGBM::Booster> >::type booster_handle(booster_handleSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type i(iSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< int >::type predict_type(predict_typeSEXP);
+    Rcpp::traits::input_parameter< int >::type num_used_iterations(num_used_iterationsSEXP);
+    rcpp_result_gen = Rcpp::wrap(RLGBM_PredictFromCSR(booster_handle, i, p, x, dim, predict_type, num_used_iterations));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RLGBM_SaveBoosterModel
+void RLGBM_SaveBoosterModel(Rcpp::XPtr<::LightGBM::Booster> booster_handle, CharacterVector filename, int num_used_iterations);
+RcppExport SEXP RLightGBM_RLGBM_SaveBoosterModel(SEXP booster_handleSEXP, SEXP filenameSEXP, SEXP num_used_iterationsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<::LightGBM::Booster> >::type booster_handle(booster_handleSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type filename(filenameSEXP);
+    Rcpp::traits::input_parameter< int >::type num_used_iterations(num_used_iterationsSEXP);
+    RLGBM_SaveBoosterModel(booster_handle, filename, num_used_iterations);
+    return R_NilValue;
 END_RCPP
 }

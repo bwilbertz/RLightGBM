@@ -5,3 +5,43 @@ lgbm.data.create <- function(x, params = "num_model_predict=-1") {
     .Call('RLightGBM_RLGBM_CreateDatasetFromMat', PACKAGE = 'RLightGBM', x, params)
 }
 
+lgbm.data.create.CSR <- function(i, p, x, dim, params = "num_model_predict=-1") {
+    .Call('RLightGBM_RLGBM_CreateDatasetFromCSR', PACKAGE = 'RLightGBM', i, p, x, dim, params)
+}
+
+lgbm.data.create.CSC <- function(i, p, x, dim, params = "num_model_predict=-1") {
+    .Call('RLightGBM_RLGBM_CreateDatasetFromCSC', PACKAGE = 'RLightGBM', i, p, x, dim, params)
+}
+
+lgbm.data.setField <- function(data_handle, field_name, x) {
+    invisible(.Call('RLightGBM_RLGBM_DatasetSetField', PACKAGE = 'RLightGBM', data_handle, field_name, x))
+}
+
+lgbm.booster.create.str <- function(data_handle, params = "task=train") {
+    .Call('RLightGBM_RLGBM_CreateBoosterFromString', PACKAGE = 'RLightGBM', data_handle, params)
+}
+
+lgbm.booster.create <- function(data_handle, config) {
+    .Call('RLightGBM_RLGBM_CreateBooster', PACKAGE = 'RLightGBM', data_handle, config)
+}
+
+lgbm.booster.load <- function(filename) {
+    .Call('RLightGBM_RLGBM_CreateBoosterFromFile', PACKAGE = 'RLightGBM', filename)
+}
+
+lgbm.booster.train <- function(booster_handle, num_iters, eval_iters = 0L) {
+    invisible(.Call('RLightGBM_RLGBM_TrainBooster', PACKAGE = 'RLightGBM', booster_handle, num_iters, eval_iters))
+}
+
+lgbm.booster.predict <- function(booster_handle, x, predict_type = 0L, num_used_iterations = -1L) {
+    .Call('RLightGBM_RLGBM_PredictFromMat', PACKAGE = 'RLightGBM', booster_handle, x, predict_type, num_used_iterations)
+}
+
+lgbm.booster.predict.CSR <- function(booster_handle, i, p, x, dim, predict_type = 0L, num_used_iterations = -1L) {
+    .Call('RLightGBM_RLGBM_PredictFromCSR', PACKAGE = 'RLightGBM', booster_handle, i, p, x, dim, predict_type, num_used_iterations)
+}
+
+lgbm.booster.save <- function(booster_handle, filename, num_used_iterations = -1L) {
+    invisible(.Call('RLightGBM_RLGBM_SaveBoosterModel', PACKAGE = 'RLightGBM', booster_handle, filename, num_used_iterations))
+}
+
