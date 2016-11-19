@@ -1,3 +1,30 @@
- ## This assumes that the LGBM_HOME variable points to the LightGBM dir
- PKG_CPPFLAGS=-I$(LGBM_HOME)/include -I../inst/include -std=c++11
- PKG_LIBS=-L$(LGBM_HOME) -llightgbm $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript" -e "Rcpp:::LdFlags()")
+ 
+CXX_STD = CXX11
+
+LGBM_RFLAGS = -DUSE_SOCKET
+
+PKG_CPPFLAGS=-I../inst/include -ILightGBM/include $(LGBM_RFLAGS)
+PKG_CXXFLAGS= $(SHLIB_OPENMP_CFLAGS) $(SHLIB_PTHREAD_FLAGS)
+PKG_LIBS = $(SHLIB_OPENMP_CFLAGS) $(SHLIB_PTHREAD_FLAGS) $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript" -e "Rcpp:::LdFlags()")
+OBJECTS = ./RLightGBM.o ./RcppExports.o \
+        LightGBM/src/api.o \
+        LightGBM/src/boosting/gbdt.o \
+        LightGBM/src/boosting/boosting.o \
+        LightGBM/src/io/config.o \
+        LightGBM/src/io/tree.o \
+        LightGBM/src/io/dataset.o \
+        LightGBM/src/io/parser.o \
+        LightGBM/src/io/metadata.o \
+        LightGBM/src/io/bin.o \
+        LightGBM/src/io/dataset_loader.o \
+        LightGBM/src/metric/metric.o \
+        LightGBM/src/metric/dcg_calculator.o \
+        LightGBM/src/objective/objective_function.o \
+        LightGBM/src/network/linkers_socket.o \
+        LightGBM/src/network/linker_topo.o \
+        LightGBM/src/network/linkers_mpi.o \
+        LightGBM/src/network/network.o \
+        LightGBM/src/treelearner/data_parallel_tree_learner.o \
+        LightGBM/src/treelearner/serial_tree_learner.o \
+        LightGBM/src/treelearner/feature_parallel_tree_learner.o \
+        LightGBM/src/treelearner/tree_learner.o
