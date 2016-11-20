@@ -13,15 +13,15 @@ caretModel.LGBM <- function() {
 	
 	m$type <- c("Regression", "Classification")
 	
-	m$parameters <- data.frame(parameter = c("num_iteration", "learning_rate", "max_depth", "min_gain_to_split", "feature_fraction", 
+	m$parameters <- data.frame(parameter = c("num_iteration", "learning_rate", "num_leaves", "min_gain_to_split", "feature_fraction", 
 					"min_sum_hessian_in_leaf", "min_data_in_leaf", "bagging_fraction", "lambda_l2"),
 			class = rep("numeric", 9),
-			label = c("num_iteration", "learning_rate", "max_depth", "min_gain_to_split", "feature_fraction", 
+			label = c("num_iteration", "learning_rate", "num_leaves", "min_gain_to_split", "feature_fraction", 
 					"min_sum_hessian_in_leaf", "min_data_in_leaf", "bagging_fraction", "lambda_l2"))
 	
 	m$grid <- function (x, y, len = NULL, search = "grid") {
 		if (search == "grid") {
-			out <- expand.grid(max_depth = seq(2, len+1), 
+			out <- expand.grid(num_leaves = 2^seq(1, len), 
 					num_iteration = floor((1:len) * 50), 
 					learning_rate = c(0.1, 0.3), 
 					min_gain_to_split = 0, 
@@ -34,7 +34,7 @@ caretModel.LGBM <- function() {
 		else {
 			out <- data.frame(
 					num_iteration = sample(1:1000, size = len, replace = TRUE), 
-					max_depth = sample(1:10, replace = TRUE, size = len), 
+					num_leaves = as.Integer(2^sample(1:10, replace = TRUE, size = len)), 
 					learning_rate = runif(len, min = 0.001, max = 0.6), 
 					min_gain_to_split = runif(len, min = 0, max = 10), 
 					feature_fraction = runif(len, min = 0.3, max = 0.7),
@@ -49,11 +49,11 @@ caretModel.LGBM <- function() {
 	}
 	
 	m$loop <- function (grid) {
-		loop <- ddply(grid, c("learning_rate", "max_depth", "learning_rate", "feature_fraction", "min_gain_to_split",
+		loop <- ddply(grid, c("learning_rate", "num_leaves", "learning_rate", "feature_fraction", "min_gain_to_split",
 						"min_sum_hessian_in_leaf", "min_data_in_leaf", "bagging_fraction", "lambda_l2"), function(x) c(num_iteration = max(x$num_iteration)))
 		submodels <- vector(mode = "list", length = nrow(loop))
 		for (i in seq(along = loop$num_iteration)) {
-			index <- which(grid$max_depth == loop$max_depth[i] & 
+			index <- which(grid$num_leaves == loop$num_leaves[i] & 
 							grid$learning_rate == loop$learning_rate[i] & 
 							grid$min_gain_to_split == loop$min_gain_to_split[i] & 
 							grid$feature_fraction == loop$feature_fraction[i] & 
@@ -73,7 +73,7 @@ caretModel.LGBM <- function() {
 			x <- as.matrix(x)
 		
 		config <- list(learning_rate = param$learning_rate, 
-				max_depth = param$max_depth, 
+				num_leaves = param$num_leaves, 
 				min_gain_to_split = param$min_gain_to_split, 
 				feature_fraction = param$feature_fraction, 
 				min_sum_hessian_in_leaf = param$min_sum_hessian_in_leaf,
@@ -223,7 +223,7 @@ caretModel.LGBM <- function() {
 	m$tags <- c("Tree-Based Model", "Boosting", "Ensemble Model", "Implicit Feature Selection")
 	
 	m$sort <- function (x) {
-		x[order(x$num_iteration, x$max_depth, x$learning_rate, x$min_gain_to_split, x$feature_fraction, 
+		x[order(x$num_iteration, x$num_leaves, x$learning_rate, x$min_gain_to_split, x$feature_fraction, 
 						x$min_sum_hessian_in_leaf, x$bagging_fraction, x$lambda_l2), ]
 	}
 	
@@ -242,7 +242,7 @@ caretModel.LGBM.sparse <- function() {
 		#if (class(matrix) != "dgCMatrix") stop("Expect matrix to be of class dgCMatrix.")
 		
 		config <- list(learning_rate = param$learning_rate, 
-				max_depth = param$max_depth, 
+				num_leaves = param$num_leaves, 
 				min_gain_to_split = param$min_gain_to_split, 
 				feature_fraction = param$feature_fraction, 
 				min_sum_hessian_in_leaf = param$min_sum_hessian_in_leaf,
