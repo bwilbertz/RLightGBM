@@ -37,14 +37,17 @@ lgbm.data.setField(handle.data, "label", y)
 
 handle.booster <- lgbm.booster.create(handle.data, lapply(config, as.character))
 
-# train for num_trees iterations and eval every 5 steps
+# train for num_iterations iterations and eval every 5 steps
 lgbm.booster.train(handle.booster, num_iterations, 5)
 
-# predict (normal mode) for num_trees trees
+# predict
 y.pred <- lgbm.booster.predict(handle.booster, x.test)
 
 # test accuracy
 sum(y.test == (y.pred > 0.5)) / length(y.test)
+
+# save model (can be loaded again via lgbm.booster.load(filename))
+lgbm.booster.save(handle.booster, filename = "/tmp/model.txt")
 ```
 
 Training and prediction using [Caret](http://caret.r-forge.r-project.org/):
