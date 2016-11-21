@@ -1,4 +1,4 @@
 [submodule "pkg/RLightGBM/src/LightGBM"]
 	path = pkg/RLightGBM/src/LightGBM
 	url = https://github.com/bwilbertz/LightGBM.git
-	branch = 20161119_changeset_cpp_api
+	branch = 20161121_changeset_cpp_api
