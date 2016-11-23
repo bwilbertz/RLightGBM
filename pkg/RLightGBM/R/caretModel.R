@@ -34,11 +34,11 @@ caretModel.LGBM <- function() {
 		else {
 			out <- data.frame(
 					num_iteration = sample(1:1000, size = len, replace = TRUE), 
-					num_leaves = as.Integer(2^sample(1:10, replace = TRUE, size = len)), 
+					num_leaves = sample(2^(1:10), replace = TRUE, size = len),  
 					learning_rate = runif(len, min = 0.001, max = 0.6), 
 					min_gain_to_split = runif(len, min = 0, max = 10), 
 					feature_fraction = runif(len, min = 0.3, max = 0.7),
-					min_data_in_leaf = as.integer(runif(len, min=1, max = 100)),
+					min_data_in_leaf = sample(1:100, size = len, replace = TRUE),
 					min_sum_hessian_in_leaf = sample(0:20, size = len, replace = TRUE), 
 					bagging_fraction = runif(len, min = 0.25, max = 1), 
 					lambda_l2 = runif(len, min = 0.0, max = 1))
