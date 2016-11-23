@@ -90,6 +90,15 @@ R CMD INSTALL RLightGBM_0.1.tar.gz
 ```
 Please note that `devtools::install_github` cannot be used for installation due to devtools not supporting git submodules.
 
+For windows installation, run the final installation step from within R using `devtools` and `RTools`:
+```R
+library(devtools)
+
+find_rtools()
+
+install.packages("RLightGBM_0.1.tar.gz", type="source", repos=NULL)
+```
+
 ## Disclaimer
 
 This package was written in order to run some testing of LightGBM from `R` using Caret. 
