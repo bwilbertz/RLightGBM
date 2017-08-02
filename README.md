@@ -96,7 +96,7 @@ library(devtools)
 
 find_rtools()
 
-install.packages("RLightGBM_0.1.tar.gz", type="source", repos=NULL)
+install.packages("RLightGBM/RLightGBM_0.1.tar.gz", type="source", repos=NULL)
 ```
 
 ## Disclaimer
