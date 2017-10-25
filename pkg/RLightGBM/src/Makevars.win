@@ -9,6 +9,9 @@ PKG_LIBS = $(SHLIB_OPENMP_CFLAGS) $(SHLIB_PTHREAD_FLAGS) -lws2_32 -liphlpapi \
 		$(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript" -e "Rcpp:::LdFlags()")
 OBJECTS = ./RLightGBM.o ./RcppExports.o \
         LightGBM/src/api.o \
+        LightGBM/src/boosting/gbdt_prediction.o \
+        LightGBM/src/boosting/prediction_early_stop.o \
+        LightGBM/src/boosting/gbdt_model.o \
         LightGBM/src/boosting/gbdt.o \
         LightGBM/src/boosting/boosting.o \
         LightGBM/src/io/config.o \
@@ -25,7 +28,9 @@ OBJECTS = ./RLightGBM.o ./RcppExports.o \
         LightGBM/src/network/linker_topo.o \
         LightGBM/src/network/linkers_mpi.o \
         LightGBM/src/network/network.o \
+        LightGBM/src/treelearner/gpu_tree_learner.o \
         LightGBM/src/treelearner/data_parallel_tree_learner.o \
         LightGBM/src/treelearner/serial_tree_learner.o \
         LightGBM/src/treelearner/feature_parallel_tree_learner.o \
+        LightGBM/src/treelearner/voting_parallel_tree_learner.o \
         LightGBM/src/treelearner/tree_learner.o

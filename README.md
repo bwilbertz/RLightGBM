@@ -29,7 +29,8 @@ config <- list(objective = "binary",
 		bagging_freq = 5,
 		bagging_fraction = 0.8,
 		min_data_in_leaf = 50,
-		min_sum_hessian_in_leaf = 5.0)
+		min_sum_hessian_in_leaf = 5.0,
+		verbosity = -1)
 
 # create data handle and booster
 handle.data <- lgbm.data.create(x)
@@ -37,8 +38,8 @@ lgbm.data.setField(handle.data, "label", y)
 
 handle.booster <- lgbm.booster.create(handle.data, lapply(config, as.character))
 
-# train for num_iterations iterations and eval every 5 steps
-lgbm.booster.train(handle.booster, num_iterations, 5)
+# train for num_iterations iterations
+lgbm.booster.train(handle.booster, num_iterations)
 
 # predict
 y.pred <- lgbm.booster.predict(handle.booster, x.test)
@@ -58,7 +59,7 @@ data(iris)
 
 model <-caretModel.LGBM()
 
-fit <- train(Species ~ ., data = iris, method=model, verbosity = 0)
+fit <- train(Species ~ ., data = iris, method=model, verbosity = -1)
 print(fit)
 
 y.pred <- predict(fit, iris[,1:4])
@@ -73,7 +74,7 @@ model.sparse <- caretModel.LGBM.sparse()
 # generate a sparse matrix
 mat <- Matrix(as.matrix(iris[,1:4]), sparse = T)
 
-fit <- train(data.frame(idx = 1:nrow(iris)), iris$Species, method = model.sparse, matrix = mat, verbosity = 0)
+fit <- train(data.frame(idx = 1:nrow(iris)), iris$Species, method = model.sparse, matrix = mat, verbosity = -1)
 print(fit)
 
 ```
