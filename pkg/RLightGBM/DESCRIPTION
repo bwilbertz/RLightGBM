@@ -1,8 +1,8 @@
 Package: RLightGBM
 Type: Package
 Title: R Interface to the LightGBM library
-Version: 0.1
-Date: 2016-11-11
+Version: 0.2
+Date: 2017-10-26
 Author: Microsoft, R Interface by Benedikt Wilbertz
 Maintainer: Benedikt Wilbertz <benedikt.wilbertz@trendiction.com>
 Description: LightGBM is a gradient boosting framework that uses tree based learning algorithms. It is designed to be distributed and efficient.

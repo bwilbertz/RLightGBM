@@ -87,7 +87,7 @@ git clone --recursive https://github.com/bwilbertz/RLightGBM.git
 
 cd RLightGBM
 R CMD build --no-build-vignettes pkg/RLightGBM
-R CMD INSTALL RLightGBM_0.1.tar.gz
+R CMD INSTALL RLightGBM_0.2.tar.gz
 ```
 Please note that `devtools::install_github` cannot be used for installation due to devtools not supporting git submodules.
 
@@ -97,7 +97,7 @@ library(devtools)
 
 find_rtools()
 
-install.packages("RLightGBM_0.1.tar.gz", type="source", repos=NULL)
+install.packages("RLightGBM_0.2.tar.gz", type="source", repos=NULL)
 ```
 
 ## Disclaimer
