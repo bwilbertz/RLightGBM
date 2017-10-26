@@ -45,3 +45,7 @@ lgbm.booster.save <- function(booster_handle, filename, num_used_iterations = -1
     invisible(.Call('_RLightGBM_RLGBM_SaveBoosterModel', PACKAGE = 'RLightGBM', booster_handle, filename, num_used_iterations))
 }
 
+lgbm.booster.dump <- function(booster_handle, num_iteration = -1L) {
+    .Call('_RLightGBM_RLGBM_DumpBoosterModel', PACKAGE = 'RLightGBM', booster_handle, num_iteration)
+}
+

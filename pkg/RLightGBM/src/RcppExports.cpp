@@ -149,6 +149,18 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// RLGBM_DumpBoosterModel
+CharacterVector RLGBM_DumpBoosterModel(Rcpp::XPtr<::LightGBM::Booster> booster_handle, int num_iteration);
+RcppExport SEXP _RLightGBM_RLGBM_DumpBoosterModel(SEXP booster_handleSEXP, SEXP num_iterationSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<::LightGBM::Booster> >::type booster_handle(booster_handleSEXP);
+    Rcpp::traits::input_parameter< int >::type num_iteration(num_iterationSEXP);
+    rcpp_result_gen = Rcpp::wrap(RLGBM_DumpBoosterModel(booster_handle, num_iteration));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_RLightGBM_RLGBM_CreateDatasetFromMat", (DL_FUNC) &_RLightGBM_RLGBM_CreateDatasetFromMat, 2},
@@ -162,6 +174,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RLightGBM_RLGBM_PredictFromMat", (DL_FUNC) &_RLightGBM_RLGBM_PredictFromMat, 4},
     {"_RLightGBM_RLGBM_PredictFromCSR", (DL_FUNC) &_RLightGBM_RLGBM_PredictFromCSR, 7},
     {"_RLightGBM_RLGBM_SaveBoosterModel", (DL_FUNC) &_RLightGBM_RLGBM_SaveBoosterModel, 3},
+    {"_RLightGBM_RLGBM_DumpBoosterModel", (DL_FUNC) &_RLightGBM_RLGBM_DumpBoosterModel, 2},
     {NULL, NULL, 0}
 };
 

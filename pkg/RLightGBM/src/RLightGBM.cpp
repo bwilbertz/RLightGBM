@@ -202,3 +202,10 @@ void RLGBM_SaveBoosterModel(Rcpp::XPtr<::LightGBM::Booster> booster_handle,
       num_used_iterations, (Rcpp::as < std::string > (filename)).c_str());
 }
 
+// [[Rcpp::export(name="lgbm.booster.dump")]]
+CharacterVector RLGBM_DumpBoosterModel(Rcpp::XPtr<::LightGBM::Booster> booster_handle,
+                            int num_iteration = -1) {
+
+  return booster_handle->DumpModel(num_iteration);
+}
+
