@@ -128,7 +128,7 @@ NumericVector RLGBM_PredictFromMat(
 
   NumericVector out(num_class * x.nrow());
 
-  long int out_len;
+  int64_t out_len;
 
   booster_handle->Predict(num_used_iterations, predict_type, x.nrow(),
                           get_row_fun, &out[0], &out_len);
@@ -152,7 +152,7 @@ NumericVector RLGBM_PredictFromCSR(
 
   NumericVector out(num_class * dim[0]);
 
-  long int out_len;
+  int64_t out_len;
 
   booster_handle->Predict(num_used_iterations, predict_type, dim[0],
                           get_row_fun, &out[0], &out_len);
